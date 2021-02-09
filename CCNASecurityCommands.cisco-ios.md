@@ -157,7 +157,7 @@ aaa authorization exec default group tacacs+
 aaa authorization network default group tacacs+
 aaa authorization login default group tacacs+
 ```
-#AAA accounting
+# AAA accounting
 ```
 username JR-ADMIN alg scrypt secret cisco12345
 aaa new-model
