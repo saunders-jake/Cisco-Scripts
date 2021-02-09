@@ -59,11 +59,11 @@ ntp trusted-key <KEY_ID>
 ntp authentication-key <KEY_ID> md5 <AUTHENTICATION_KEY>
 ntp server <IP_ADDRESS> key <KEY_ID> source <INTERFACE_NAME>
 clock timezone <ENTERPRISE_ZONE_NAME> <LOCAL_OFFSET>
-logging enable> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! VERIFY
+logging enable
 no logging console
 no logging monitor
 logging host <INTERFACE_NAME> <HOST_IP_ADDRESS>
-logging device-id hostname !!!!!!!!!!!!!!!!!! VERIFY if "hostname" or actual device hostname
+logging device-id hostname 
 logging history 5
 logging timestamp
 logging facility 23
@@ -101,7 +101,7 @@ no dhcprelay enable <UNTURSTED_INTERFACE_NAME>
 icmp permit <TRUSTED_SUBNET> <TRUSTED_MASK> <UNTRUSTED_INTERFACE_NAME>
 icmp deny any <UNTRUSTED_INTERFACE_NAME>
 dns domain-lookup <INTERFACE_NAME>
-dns server-group DefaultDNS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHEKTHIS default dns
+dns server-group DefaultDNS 
 name-server <DNS_IP_ADDRESS>
 ip audit name <AUDIT_NAME> attack action alarm <PREVENTION_ACTION>
 ip audit interface <UNTRUSTED_INTERFACE_NAME> <AUDIT_NAME>
