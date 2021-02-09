@@ -1,0 +1,144 @@
+passwd <LOGIN_PASSWORD>
+enable password <ENABLE_PASSWORD> level <PRIVILEGE_LEVEL>
+key config-key password-encryption <PASSPHRASE>
+password encryption aes
+write memory
+no service password-recovery
+password-policy minimum-changes 14
+password-policy minimum-uppercase 1
+password-policy minimum-lowercase 1
+password-policy minimum-numeric 1
+password-policy minimum-special 1
+password-policy minimum-length 14
+domain-name <ENTERPRISE_DOMAIN>
+hostname <NAME_OF_DEVICE>
+interface <UNUSED_PHYSICAL_INTERFACE_NAME>
+shutdown
+verify <NEW_IMAGE_LOCATION> <MD5_CHECKSUM>
+show software authenticity running | in CiscoSystems$
+aaa local authentication attempts max-fail 3
+username <LOCAL_USERNAME> password <LOCAL_PASSWORD> privilege <LEVEL>
+show running-config username | in _admin_|_asa_|_cisco_|_pix_|_root_
+configure terminal
+no username <KNOWN_DEFAULT_ACCOUNT>
+aaa-server <SERVER-GROUP_NAME> protocol <PROTOCOL_NAME>
+aaa-server <SERVER-GROUP_NAME> (<INTERFACE_NAME>) host <AAA_SERVER_IP> <SHARED_KEY>
+aaa authentication enable console <SERVER-GROUP_NAME> local
+aaa authentication http console <SERVER-GROUP_NAME> local
+aaa authentication secure-http-client
+aaa authentication serial console <SERVER-GROUP_NAME> local
+aaa authentication ssh console <SERVER-GROUP_name> local
+aaa authentication telnet console <SERVER-GROUP_NAME> local
+aaa authorization command <SERVER-GROUP_NAME> LOCAL
+aaa authorization exec authentication-server
+aaa accounting command <SERVER-GROUP_NAME>
+aaa accounting ssh console <SERVER-GROUP_NAME>
+aaa accounting serial console <SERVER-GROUP_NAME>
+aaa accounting enable console <SERVER-GROUP_NAME>
+banner asdm <LINE_OF_MESSAGE>
+banner exec <LINE_OF_MESSAGE>
+banner login <LINE_OF_MESSAGE>
+banner motd <LINE_OF_MESSAGE>
+ssh <SOURCE_IP> <SOURCE_NETMASK> <INTERFACE_NAME>
+ssh version 2
+crypto key zeroize rsa
+crypto key generate rsa modulus <RSA_KEY_SIZE>
+write memory
+ssh scopy enable
+show run telnet | in telnet_[0-9]|[0-9]|[0-9]
+no telnet 0.0.0.0 0.0.0.0 <INTERFACE_NAME>
+no telnet timeout <CONFIGURED_TIMEOUT>
+http <SOURCE_IP> <SOURCE_NETMASK> <INTERFACE_NAME>
+ssl cipher tlsv1 custom AES256-SHA
+ssl cipher tlsv1 custom AES256-SHA
+console timeout 5
+ssh timeout 5
+http timeout 5
+ntp authenticate
+ntp trusted-key <KEY_ID>
+ntp authentication-key <KEY_ID> md5 <AUTHENTICATION_KEY>
+ntp server <IP_ADDRESS> key <KEY_ID> source <INTERFACE_NAME>
+clock timezone <ENTERPRISE_ZONE_NAME> <LOCAL_OFFSET>
+logging enable> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! VERIFY
+no logging console
+no logging monitor
+logging host <INTERFACE_NAME> <HOST_IP_ADDRESS>
+logging device-id hostname !!!!!!!!!!!!!!!!!! VERIFY if "hostname" or actual device hostname
+logging history 5
+logging timestamp
+logging facility 23
+logging buffer-size 524288
+logging buffered 3
+logging mail critical
+logging from-address <FIREWALL_EMAIL_ACCOUNT>
+logging recipient-address <FIREWALL_ADMIN_EMAIL>
+smtp-server <MAIL_SERVER_IP>
+snmp-server group <GROUP_NAME> v3 priv
+snmp-server user <SNMP_USERNAME> <GROUP_NAME> v3 auth SHA <AUTHENTICATION_PASSWORD> priv AES 254 <ENCRYPTION_PASSWORD>
+snmp-server host <INTERFACE_NAME> <HOST_IP_ADDRESS> version 3 <SNMP_USER>
+snmp-server enable traps snmp authentication
+snmp-server enable traps snmp coldstart 
+snmp-server enable traps snmp linkdown 
+snmp-server enable traps snmp linkup 
+snmp-server community <SNMP_COMMUNITY_STRING>
+interface <INTERFACE_NAME>
+rip authentication mode md5
+rip authentication key <KEY_VALUE> key_id <KEY_ID>
+interface <INTERFACE_NAME>
+ospf authentication message-digest
+ospf message-digest-key <KEY_ID> md5 <KEY_VALUE>
+exit
+area <AREA_ID> authentication message-digest
+interface <INTERFACE_NAME>
+authentication mode eigrp <AS_NUMBER> md5
+authentication key eigrp <AS_NUMBER> <KEY_VALUE> key-id <KEY_ID>
+exit
+area <AREA_ID> authentication message-digest
+sysopt noproxyarp <UNTRUSTED_INTERFACE_NAME>
+dns-guard
+no dhcpd enable <UNTRUSTED_INTERFACE_NAME>
+no dhcprelay enable <UNTURSTED_INTERFACE_NAME>
+icmp permit <TRUSTED_SUBNET> <TRUSTED_MASK> <UNTRUSTED_INTERFACE_NAME>
+icmp deny any <UNTRUSTED_INTERFACE_NAME>
+dns domain-lookup <INTERFACE_NAME>
+dns server-group DefaultDNS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHEKTHIS default dns
+name-server <DNS_IP_ADDRESS>
+ip audit name <AUDIT_NAME> attack action alarm <PREVENTION_ACTION>
+ip audit interface <UNTRUSTED_INTERFACE_NAME> <AUDIT_NAME>
+fragment chain 1 <UNTRUSTED_INTERFACE_NAME>
+policy-map global_policy
+class inspection default
+inspect <PROTOCOL_NAME>
+exit
+exit
+service-policy global_policy global
+class-map <CLASS_NAME>
+match any
+exit
+policy-map <POLICY_NAME>
+class <CLASS_NAME>
+set connection conn-max <CONN_MAX>
+set connection embryonic-conn-max <CONN_EMBRYONIC_MAX>
+set connection per-client-max <CLIENT_MAX>
+set connection per-client-embryonic-max <CLIENT_EMBRYONIC_MAX>
+service-policy <POLICY_NAME> interface <UNTRUSTED_INTERFACE_NAME>
+threat-detection statistics tcp-intercept
+ip verify reverse-path interface <UNTRUSTED_INTERFACE_NAME>
+interface <INTERNET_FACING_INTERFACE> 
+security-level 0
+dynamic-filter updater-client enable 
+dynamic-filter use-database
+class-map <DNS_CMAP_NAME>
+match port udp eq domain
+exit
+policy-map <DNS_PMAP_NAME>
+class <DNS_CMAP_NAME>
+inspect dns present_dns_map dynamic-filter-snoop
+exit
+service-policy <DNS_PMAP_NAME> interface <UNTRUSTED_INTERFACE_NAME>
+dynamic-filter enable interface <UNTRUSTED_INTERFACE_NAME>
+filter activex <PORT> <INTERNAL_USERS_IP_RANGE> <INTERNAL_USERS_MASK> <EXTERNAL_SERVERS_IP> <EXTERNAL_SERVERS_MASK>
+filter java <PORT> <INTERNAL_USERS_IP_RANGE> <INTERNAL_USERS_MASK> <EXTERNAL_SERVERS_IP> <EXTERNAL_SERVERS_MASK>
+show run access-group
+show run access-list | in deny.ip.any.any
+<ACCESS-LIST_NAME> extended deny ip any any log
