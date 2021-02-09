@@ -15,6 +15,7 @@ This file is the same as harden.cisco-asa, but it doesn't have comments. It coul
 ## CCNASecurityCommands.cisco-ios
 This file contains commands from the CCNA Security Netacad cirriculum. I was curating it while studying for the certification test, but never ended up taking the exam, so it's incomplete.
 
+Note: Some commands may not work in Packet Tracer, as it is not a fully featured IOS.
 
 
 ## CCNASecurityFinal.md
